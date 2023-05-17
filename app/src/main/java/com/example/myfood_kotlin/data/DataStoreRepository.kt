@@ -6,6 +6,8 @@ import androidx.datastore.preferences.*
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
+import com.example.myfood_kotlin.util.Constants.Companion.DEFAULT_DIET_TYPE
+import com.example.myfood_kotlin.util.Constants.Companion.DEFAULT_MEAL_TYPE
 import com.example.myfood_kotlin.util.Constants.Companion.PREFERENCES_BACK_ONLINE
 import com.example.myfood_kotlin.util.Constants.Companion.PREFERENCES_DIET_TYPE
 import com.example.myfood_kotlin.util.Constants.Companion.PREFERENCES_DIET_TYPE_ID
@@ -59,9 +61,9 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             }
         }
         .map { preferences ->
-            val selectedMealType = preferences[PreferenceKeys.selectedMealType] ?: PREFERENCES_MEAL_TYPE
+            val selectedMealType = preferences[PreferenceKeys.selectedMealType] ?: DEFAULT_MEAL_TYPE
             val selectedMealTypeId = preferences[PreferenceKeys.selectedMealTypeId] ?: 0
-            val selectedDietType = preferences[PreferenceKeys.selectedDietType] ?: PREFERENCES_DIET_TYPE
+            val selectedDietType = preferences[PreferenceKeys.selectedDietType] ?: DEFAULT_DIET_TYPE
             val selectedDietTypeId = preferences[PreferenceKeys.selectedDietTypeId] ?: 0
             MealAndDietType(
                 selectedMealType,

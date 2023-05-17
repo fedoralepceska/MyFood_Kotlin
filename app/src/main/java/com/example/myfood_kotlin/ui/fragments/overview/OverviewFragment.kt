@@ -27,7 +27,7 @@ class OverviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = com.example.myfood_kotlin.databinding.FragmentOverviewBinding.inflate(inflater, container, false)
+        _binding = FragmentOverviewBinding.inflate(inflater, container, false)
 
         val args = arguments
         val myBundle: Result? = args!!.retrieveParcelable(RECIPE_RESULT_KEY) as Result?

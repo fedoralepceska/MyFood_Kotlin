@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EA</color>
-    <color name="colorPrimaryDark">#5502C8</color>
+    <color name="colorPrimary">#FFF0B4</color>
+    <color name="colorPrimaryDark">#CDB44F</color>
     <color name="colorAccent">#9D46FF</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -26,7 +26,7 @@
     <color name="backgroundColor">@color/lightGray</color>
     <color name="placeholderColor">@color/mediumGray</color>
     <color name="itemColor">@color/darker</color>
-    <color name="checkedChipBackgroundColor">#206200EA</color>
+    <color name="checkedChipBackgroundColor">#20FFF0B4</color>
     <color name="chipBackgroundColor">@color/lightGray</color>
     <color name="descriptionColor">@color/darkGray</color>
 
@@ -41,10 +41,10 @@
     <color name="statusBarColor">@color/colorPrimaryDark</color>
     <color name="contextualStatusBarColor">@color/darker</color>
     <color name="contextualActionBarColor">@color/dark</color>
-    <color name="cardBackgroundLightColor">#106200EA</color>
-    <color name="actionBarBackgroundColor">@color/colorPrimary</color>
+    <color name="cardBackgroundLightColor">#10FFF0B4</color>
+    <color name="actionBarBackgroundColor">@color/colorPrimaryDark</color>
 
     <color name="bottomNavBackground">@color/white</color>
     <color name="bottomNavItemColor">@color/darkGray</color>
-    <color name="bottomNavCheckedItemColor">@color/colorPrimary</color>
+    <color name="bottomNavCheckedItemColor">@color/colorPrimaryDark</color>
 </resources>

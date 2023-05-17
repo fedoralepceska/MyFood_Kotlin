@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.myfood_kotlin.R
+import com.example.myfood_kotlin.models.Result
 import com.example.myfood_kotlin.adapters.IngredientsAdapter
 import com.example.myfood_kotlin.databinding.FragmentIngredientsBinding
 import com.example.myfood_kotlin.util.Constants.Companion.RECIPE_RESULT_KEY
+import com.example.myfood_kotlin.util.retrieveParcelable
 
 class IngredientsFragment : Fragment() {
 
@@ -27,18 +27,17 @@ class IngredientsFragment : Fragment() {
         _binding = FragmentIngredientsBinding.inflate(inflater, container, false)
 
         val args = arguments
-        val myBundle: com.example.myfood_kotlin.models.Result? = args?.getParcelable(RECIPE_RESULT_KEY)
+        val myBundle: Result? = args?.retrieveParcelable(RECIPE_RESULT_KEY)
 
         setupRecyclerView()
-        myBundle?.extendedIngredients?.let {
-            mAdapter.setData(it)
-        }
+        myBundle?.extendedIngredients?.let { mAdapter.setData(it) }
+
         return binding.root
     }
 
     private fun setupRecyclerView() {
-        binding.ingredientsRecyclerView.adapter = mAdapter
-        binding.ingredientsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.ingredientsRecyclerview.adapter = mAdapter
+        binding.ingredientsRecyclerview.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun onDestroyView() {
