@@ -1,6 +1,7 @@
 package com.example.myfood_kotlin.espresso_tests.favorites
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions.click
@@ -15,12 +16,17 @@ import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import android.content.Context
+import androidx.test.platform.app.InstrumentationRegistry
 
 @RunWith(AndroidJUnit4::class)
 class FavoriteRecipesEspressoTest {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
+
+    // Obtain a reference to the application's context for the delete all test
+    private val context: Context = InstrumentationRegistry.getInstrumentation().context
 
     // function which returns true if the recycler view is displayed
     fun ViewInteraction.isDisplayed(): Boolean {
@@ -114,20 +120,17 @@ class FavoriteRecipesEspressoTest {
     }
 
     // Scenario 3: Deleting all favorite recipes
-//    TODO: find how to click the ... button
-//    @Test
-//    fun testDeleteAll(){
-//        // Click on the favorites button
-//        onView(withId(R.id.favoriteRecipesFragment))
-//            .perform(click())
-//        // Click on the three dots button
-////        onView(withId(R.id.toolbar))
-////            .perform(click())
-//        // Click on Delete All button
-//        Thread.sleep(10000)
-//        onView(withId(R.id.deleteAll_favorite_recipes_menu))
-//            .perform(click())
-////        Check whether there are favorites present
-////        onView(withId(R.id.no_data_text_view)).check(matches(isDisplayed()))
-//    }
+    @Test
+    fun testDeleteAllFavorites(){
+        // Click on the favorites button
+        onView(withId(R.id.favoriteRecipesFragment))
+            .perform(click())
+        // Open the overflow menu in the app bar (click the three dots button)
+        openActionBarOverflowOrOptionsMenu(context)
+        // Click on the Delete All button
+        onView(withText("Delete All"))
+            .perform(click())
+        // Check whether all favorite recipes are deleted
+        onView(withId(R.id.no_data_image_view)).check(matches(isDisplayed()))
+    }
 }
