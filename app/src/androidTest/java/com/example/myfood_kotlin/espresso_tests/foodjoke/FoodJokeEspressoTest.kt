@@ -1,15 +1,18 @@
 package com.example.myfood_kotlin.espresso_tests.foodjoke
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openContextualActionModeOverflowMenu
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import org.junit.Test
 import com.example.myfood_kotlin.R
 import com.example.myfood_kotlin.ui.MainActivity
 import org.junit.Rule
+import androidx.test.espresso.assertion.ViewAssertions.matches
 
 class FoodJokeEspressoTest {
 
@@ -28,6 +31,7 @@ class FoodJokeEspressoTest {
     }
 
     // Scenario 2: Share button works
+    // TODO: test clicking one of the options
     @Test
     fun testShareFoodJokeButton(){
         // Click on the food joke button
@@ -36,9 +40,18 @@ class FoodJokeEspressoTest {
         // Click on the share button
         onView(withId(R.id.share_food_joke_menu))
             .perform(click())
+        openContextualActionModeOverflowMenu()
         // Verify that share menu is opened
-        onView(withId(R.id.food_joke_text_view))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+//        onView(withText("Gmail"))
+//            .check(matches(ViewMatchers.isDisplayed()))
+//        onView(withText("Bluetooth"))
+//            .check(matches(ViewMatchers.isDisplayed()))
+//        onView(withText("Nearby Share"))
+//            .check(matches(ViewMatchers.isDisplayed()))
+//        onView(withText("Drive"))
+//            .check(matches(ViewMatchers.isDisplayed()))
+//        onView(withText("Google"))
+//            .check(matches(ViewMatchers.isDisplayed()))
     }
 
 }

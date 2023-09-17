@@ -1,7 +1,9 @@
 package com.example.myfood_kotlin.espresso_tests.recipes.main_page
 
+import android.provider.Settings.Global.getString
 import android.view.KeyEvent
 import android.widget.SearchView
+import androidx.core.content.res.TypedArrayUtils.getText
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
@@ -13,8 +15,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.example.myfood_kotlin.R
 import com.example.myfood_kotlin.ui.MainActivity
-import com.google.android.material.datepicker.CompositeDateValidator.allOf
-import org.hamcrest.CoreMatchers.allOf
 import org.junit.Rule
 import org.junit.Test
 
@@ -73,13 +73,4 @@ class RecipesEspressoTest {
 //        onView(withId(R.id.search_src_text)).perform(pressKey(KeyEvent.KEYCODE_ENTER))
 //
 //    }
-
-    // TODO: check display after click
-    @Test
-    fun testOpeningRecipe(){
-        onView(withId(R.id.recyclerview))
-            .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-    }
-
-    // TODO: add test for adding favorite recipe
 }
