@@ -106,4 +106,6 @@ dependencies {
     // Jsoup
     implementation 'org.jsoup:jsoup:1.14.3'
 
+    androidTestImplementation('androidx.test.uiautomator:uiautomator:2.3.0-alpha03')
+
 }
