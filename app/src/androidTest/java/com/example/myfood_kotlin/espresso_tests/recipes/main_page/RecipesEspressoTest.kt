@@ -34,7 +34,6 @@ class RecipesEspressoTest {
             .check(matches(ViewMatchers.isDisplayed()))
     }
 
-
     // Scenario 2: Search recipes
 
 //    TODO (optional): find how to input text through keyboard

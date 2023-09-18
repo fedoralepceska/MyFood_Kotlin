@@ -9,6 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.example.myfood_kotlin.R
 import com.example.myfood_kotlin.ui.MainActivity
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -16,27 +17,26 @@ class RecipesBottomSheetEspressoTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
+    @Before
+    fun setUp(){
+        // Click on the recipesBottomSheet
+        onView(withId(R.id.recipes_fab))
+            .perform(click())
+    }
 
     // Scenario 1: Display bottom sheet
 
     @Test
     fun testRecipesBottomSheetIsDisplayed(){
-        // Click on the recipesBottomSheet
-        onView(withId(R.id.recipes_fab))
-            .perform(click())
         // Verify that the Bottom sheet is displayed
         onView(withId(R.id.mealType_txt))
             .check(matches(ViewMatchers.isDisplayed()))
     }
 
-
     // Scenario 2: Applying filters to recipes
 
     @Test
     fun testRecipesFilter(){
-        // Click on the recipesBottomSheet
-        onView(withId(R.id.recipes_fab))
-            .perform(click())
         // Scroll meal types and select drinks
         onView(withId(R.id.drink_chip))
             .perform(ViewActions.scrollTo()).perform(click())
