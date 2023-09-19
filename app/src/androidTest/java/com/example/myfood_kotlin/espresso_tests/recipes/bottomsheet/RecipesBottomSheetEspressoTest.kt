@@ -5,14 +5,20 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.myfood_kotlin.R
 import com.example.myfood_kotlin.ui.MainActivity
+import com.google.android.material.chip.Chip
+import org.hamcrest.CoreMatchers.allOf
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class RecipesBottomSheetEspressoTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
@@ -45,5 +51,13 @@ class RecipesBottomSheetEspressoTest {
             .perform(ViewActions.scrollTo()).perform(click())
         onView(withId(R.id.apply_btn))
             .perform(click())
+        // Check display of element
+        onView(allOf(withId(R.id.title_textView), withText("Berry Banana Breakfast Smoothie")))
+            .check(matches(isDisplayed()))
+    }
+
+    @After
+    fun tearDown(){
+        activityRule.scenario.close()
     }
 }

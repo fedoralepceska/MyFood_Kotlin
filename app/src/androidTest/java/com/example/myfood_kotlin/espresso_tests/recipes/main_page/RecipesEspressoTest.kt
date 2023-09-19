@@ -1,75 +1,101 @@
 package com.example.myfood_kotlin.espresso_tests.recipes.main_page
 
-import android.provider.Settings.Global.getString
 import android.view.KeyEvent
-import android.widget.SearchView
-import androidx.core.content.res.TypedArrayUtils.getText
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.assertThat
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.myfood_kotlin.R
 import com.example.myfood_kotlin.ui.MainActivity
+import org.hamcrest.CoreMatchers.*
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class RecipesEspressoTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-    // Scenario 1: The recipes page is shown after clicking recipes button
+    fun ViewInteraction.checkItemCount(expectedCount: Int) {
+        check { view, noViewFoundException ->
+            if (noViewFoundException != null) {
+                throw noViewFoundException
+            }
+
+            val recyclerView = view as RecyclerView
+            val adapter = recyclerView.adapter
+            assertThat(adapter?.itemCount, `is`(expectedCount))
+        }
+    }
 
     @Test
     fun testRecyclerViewIsDisplayed(){
         // Click on recipes button
-        onView(withId(R.id.recipesFragment))
+        Espresso.onView(ViewMatchers.withId(R.id.recipesFragment))
             .perform(click())
         // Verify that the RecyclerView is displayed
-        onView(withId(R.id.recyclerview))
+        Espresso.onView(ViewMatchers.withId(R.id.recyclerview))
             .check(matches(ViewMatchers.isDisplayed()))
     }
 
     // Scenario 2: Search recipes
 
-//    TODO (optional): find how to input text through keyboard
-
     @Test
     fun testSearch(){
-//        onView(withId(R.id.menu_search))
-//            .perform(typeText("Captain America"), pressKey(KeyEvent.KEYCODE_ENTER))
-
-        // Click the search button
-        onView(withId(R.id.menu_search))
+        // Click on the search button
+        Espresso.onView(ViewMatchers.withId(R.id.menu_search))
             .perform(click())
-//        Thread.sleep(2000)
-//        // Enter text into the SearchView (doesn't work)
-//        onView(isAssignableFrom(androidx.appcompat.widget.SearchView::class.java))
-//            .perform(typeText("Captain america"))
-//        onView(isAssignableFrom(SearchView::class.java))
-//            .perform(typeText("Captain America"), pressKey(KeyEvent.KEYCODE_ENTER))
+        // Input text
+        Espresso.onView(ViewMatchers.withId(R.id.menu_search))
+            .perform(pressKey(KeyEvent.KEYCODE_C))
+            .perform(pressKey(KeyEvent.KEYCODE_A))
+            .perform(pressKey(KeyEvent.KEYCODE_P))
+            .perform(pressKey(KeyEvent.KEYCODE_T))
+            .perform(pressKey(KeyEvent.KEYCODE_A))
+            .perform(pressKey(KeyEvent.KEYCODE_I))
+            .perform(pressKey(KeyEvent.KEYCODE_N))
+            .perform(pressKey(KeyEvent.KEYCODE_SPACE))
+            .perform(pressKey(KeyEvent.KEYCODE_A))
+            .perform(pressKey(KeyEvent.KEYCODE_M))
+            .perform(pressKey(KeyEvent.KEYCODE_E))
+            .perform(pressKey(KeyEvent.KEYCODE_R))
+            .perform(pressKey(KeyEvent.KEYCODE_I))
+            .perform(pressKey(KeyEvent.KEYCODE_C))
+            .perform(pressKey(KeyEvent.KEYCODE_A))
+        // Press Enter to perform the search
+        Espresso.onView(ViewMatchers.withId(R.id.menu_search))
+            .perform(pressKey(KeyEvent.KEYCODE_ENTER))
+
         // Close the keyboard
-        onView(isAssignableFrom(androidx.appcompat.widget.SearchView::class.java))
+        Espresso.onView(isAssignableFrom(androidx.appcompat.widget.SearchView::class.java))
             .perform(closeSoftKeyboard())
-//        // Perform a search action (e.g., press the "Search" button on the keyboard)
-//        onView(ViewMatchers.isAssignableFrom(androidx.appcompat.widget.SearchView::class.java))
-//            .perform(ViewActions.pressImeActionButton())
+
+        Thread.sleep(5000)
+
+        // Verify that the filter worked
+//        Espresso.onView(
+//            allOf(
+//                ViewMatchers.withId(R.id.title_textView),
+//                ViewMatchers.withText("Berry Banana Breakfast Smoothie")
+//            )
+//        )
+//            .check(matches(not(ViewMatchers.isDisplayed())))
+        Espresso.onView(ViewMatchers.withId(R.id.recyclerview)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0))
+        Espresso.onView(ViewMatchers.withId(R.id.recyclerview)).checkItemCount(1)
+
     }
 
-//    @Test
-//    fun testSearch2(){
-//        // Open the SearchView
-//        onView(withId(R.id.menu_search)).perform(click())
-//
-//// Type text into the SearchView
-//        onView(withId(R.id.search_src_text)).perform(typeText("Captain America"))
-//
-//// Press Enter to perform the search
-//        onView(withId(R.id.search_src_text)).perform(pressKey(KeyEvent.KEYCODE_ENTER))
-//
-//    }
+    @After
+    fun tearDown(){
+        activityRule.scenario.close()
+    }
 }
