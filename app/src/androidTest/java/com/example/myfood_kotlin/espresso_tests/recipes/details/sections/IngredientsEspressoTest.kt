@@ -1,6 +1,5 @@
-package com.example.myfood_kotlin.espresso_tests.recipes.details
+package com.example.myfood_kotlin.espresso_tests.recipes.details.sections
 
-import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
@@ -9,9 +8,9 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.example.myfood_kotlin.R
 import com.example.myfood_kotlin.ui.MainActivity
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -20,6 +19,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class IngredientsEspressoTest {
 
+    // Scenario: ingredients section scroll and display
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
@@ -35,13 +35,11 @@ class IngredientsEspressoTest {
         Espresso.onView(ViewMatchers.withText("Ingredients")).perform(ViewActions.click())
     }
 
-    // Ingredients section
     @Test
     fun testIngredientsSection(){
-        // check whether instructions section is displayed
+        // check whether ingredients section is displayed
         Espresso.onView(ViewMatchers.withId(R.id.ingredients_recyclerview))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-
     }
 
     @Test
@@ -49,5 +47,11 @@ class IngredientsEspressoTest {
         // Scroll down
         Espresso.onView(ViewMatchers.withId(R.id.ingredients_recyclerview))
             .perform(ViewActions.scrollTo())
+    }
+
+    @After
+    fun tearDown(){
+        Espresso.pressBack()
+        activityRule.scenario.close()
     }
 }

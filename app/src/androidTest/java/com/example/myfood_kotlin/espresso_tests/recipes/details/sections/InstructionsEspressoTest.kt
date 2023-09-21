@@ -1,4 +1,4 @@
-package com.example.myfood_kotlin.espresso_tests.recipes.details
+package com.example.myfood_kotlin.espresso_tests.recipes.details.sections
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
@@ -14,10 +14,11 @@ import org.junit.Test
 
 class InstructionsEspressoTest {
 
+    // Scenario: instructions web view display
+
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-    // Instructions section
     @Test
     fun testInstructionsSection(){
         // click on first recipe

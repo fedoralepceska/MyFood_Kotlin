@@ -1,4 +1,4 @@
-package com.example.myfood_kotlin.espresso_tests.recipes.details
+package com.example.myfood_kotlin.espresso_tests.recipes.details.sections
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
@@ -18,6 +18,9 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class OverviewEspressoTest {
+
+    //Scenario: Overview scroll and display
+
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
@@ -28,6 +31,7 @@ class OverviewEspressoTest {
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
     }
+
     @Test
     fun testOpeningRecipe(){
         // check whether the correct recipe is displayed
@@ -41,5 +45,4 @@ class OverviewEspressoTest {
         Espresso.onView(ViewMatchers.withId(R.id.scrollView2))
             .perform(ViewActions.scrollTo())
     }
-
 }
