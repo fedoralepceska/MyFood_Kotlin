@@ -27,20 +27,20 @@ Note: Throughout this guide, we are assuming that you are testing a Kotlin Andro
 
 1. Open your app’s build.gradle file. This is usually not the top-level `build.gradle` file but `app/build.gradle`.
 
-2. Add the following lines inside dependencies:
-   `androidTestImplementation('androidx.test.espresso:espresso-core:3.4.0')`
-   `androidTestImplementation('androidx.test:runner:1.4.0')`
-   `androidTestImplementation('androidx.test:rules:1.4.0')`
-   `androidTestImplementation 'androidx.test:rules:1.5.0'`
+2. Add the following lines inside dependencies:<br />
+   `androidTestImplementation('androidx.test.espresso:espresso-core:3.4.0')`<br />
+   `androidTestImplementation('androidx.test:runner:1.4.0')`<br />
+   `androidTestImplementation('androidx.test:rules:1.4.0')`<br />
+   `androidTestImplementation 'androidx.test:rules:1.5.0'`<br />
 
-   You can also add the following dependencies, according to your needs.
-   `androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'`
-   `androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'`
-   `androidTestImplementation 'androidx.fragment:fragment-testing:1.6.1'`
+   You can also add the following dependencies, according to your needs.<br />
+   `androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'`<br />
+   `androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'`<br />
+   `androidTestImplementation 'androidx.fragment:fragment-testing:1.6.1'`<br />
 
 3. After you have included your dependencies, a 'Sync now' button will appear. Click it to sync your project with the gradle changes.
 
-4. Add to the same build.gradle file the following line in `android.defaultConfig`:
+4. Add to the same `build.gradle` file the following line in `android.defaultConfig`: <br />
    `testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"`
 
 That's it!
@@ -87,9 +87,8 @@ For further explanations, refer to the official espresso [documentation](https:/
         - Connect your Android physical device with usb
         - Enable developer options
         - Enable USB debugging
-        <br />
         
-    That should be it. If you are facing problems, there are many resources online. You can refer to this android [documentation](https://developer.android.com/studio/run/device).
+       That should be it. If you are facing problems, there are many resources online. You can refer to this android [documentation](https://developer.android.com/studio/run/device).
 
 2. Run the test by clicking the green triangle left to the test.<br /><br />
    Watch the application's behavior and monitor your test results.
