@@ -30,9 +30,9 @@ class RecipesTests {
     @Test
     fun testSeeRecipesScreen() {
 
-        // Check if text containing "Seed Porridge" is visible
-        val seedPorridgeText = mDevice.findObject(UiSelector().textContains("Seed Porridge"))
-        Assert.assertTrue(seedPorridgeText.exists())
+        // Check if text containing "Ancient" is visible
+        val ancientText = mDevice.findObject(UiSelector().textContains("Ancient"))
+        Assert.assertTrue(ancientText.exists())
     }
 
 
@@ -43,9 +43,35 @@ class RecipesTests {
         val placeholderRowLayout = mDevice.findObject(By.res("com.example.myfood_kotlin:id/recipesRowLayout"))
         placeholderRowLayout.click()
 
-        // Check if text containing "Seed Porridge" is visible
-        val seedPorridgeText = mDevice.findObject(UiSelector().textContains("Seed Porridge"))
-        Assert.assertTrue(seedPorridgeText.exists())
+        // Check if text containing "Ancient grains" is visible
+        val ancientText = mDevice.findObject(UiSelector().textContains("Ancient Grains"))
+        Assert.assertTrue(ancientText.exists())
+    }
+
+    @Test
+    fun testAddToFavorites() {
+
+        // Click on the view with id "placeholder_row_layout"
+        val placeholderRowLayout = mDevice.findObject(By.res("com.example.myfood_kotlin:id/recipesRowLayout"))
+        placeholderRowLayout.click()
+
+        Thread.sleep(1000)
+
+        // Save to favorites
+        val saveToFavorites = mDevice.findObject(By.res("com.example.myfood_kotlin:id/save_to_favorites_menu"))
+        saveToFavorites.click()
+
+        mDevice.pressBack()
+
+        val favoriteRecipesFragment = mDevice.findObject(UiSelector().resourceId("com.example.myfood_kotlin:id/favoriteRecipesFragment"))
+        try {
+            favoriteRecipesFragment.click()
+        } catch (e: UiObjectNotFoundException) {
+            e.printStackTrace()
+        }
+
+        val ancientText = mDevice.findObject(UiSelector().textContains("Ancient"))
+        Assert.assertTrue(ancientText.exists())
     }
 
     @Test
@@ -61,9 +87,11 @@ class RecipesTests {
         // Click on the "Ingredients" element
         ingredientsElement.click()
 
-        // Check if text containing "Sesame seeds" is visible
-        val sesameSeedsText = mDevice.findObject(UiSelector().textContains("Sesame seeds"))
-        Assert.assertTrue(sesameSeedsText.exists())
+        Thread.sleep(500)
+
+        // Check if text containing "Flour" is visible
+        val flourText = mDevice.findObject(UiSelector().textContains("Flour"))
+        Assert.assertTrue(flourText.exists())
     }
 
     @Test

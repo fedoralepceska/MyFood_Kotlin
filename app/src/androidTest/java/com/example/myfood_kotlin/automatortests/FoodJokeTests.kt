@@ -1,6 +1,7 @@
 package com.example.myfood_kotlin.automatortests
 
 import androidx.test.core.app.ActivityScenario
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
@@ -9,7 +10,9 @@ import com.example.myfood_kotlin.ui.MainActivity
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class FoodJokeTests {
 
     private lateinit var device: UiDevice
@@ -42,9 +45,13 @@ class FoodJokeTests {
         val foodJokeFragmentView = device.findObject(By.res("com.example.myfood_kotlin:id/foodJokeFragment"))
         foodJokeFragmentView.click()
 
+        Thread.sleep(500)
+
         // Click on the view with id "share_food_joke_menu"
         val shareFoodJokeMenu = device.findObject(By.res("com.example.myfood_kotlin:id/share_food_joke_menu"))
         shareFoodJokeMenu.click()
+
+        Thread.sleep(500)
 
         // Check if "Share with Messages" text is visible
         val shareWithMessages = device.findObject(UiSelector().textContains("Share with Messages"))

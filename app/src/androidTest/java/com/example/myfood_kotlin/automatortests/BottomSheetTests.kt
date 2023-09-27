@@ -1,6 +1,7 @@
 package com.example.myfood_kotlin.automatortests
 
 import androidx.test.core.app.ActivityScenario
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.*
 import com.example.myfood_kotlin.ui.MainActivity
@@ -8,7 +9,9 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import androidx.test.uiautomator.UiDevice
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class BottomSheetTests {
 
     private lateinit var device: UiDevice
@@ -66,6 +69,8 @@ class BottomSheetTests {
         // Click on the apply button
         val applyBtn = device.findObject(By.res("com.example.myfood_kotlin:id/apply_btn"))
         applyBtn.click()
+
+        Thread.sleep(2000)
 
         // Open the first recipe
         val firstRecipeLayout = device.findObject(By.res("com.example.myfood_kotlin:id/recipesRowLayout"))
